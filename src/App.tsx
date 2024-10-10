@@ -1,12 +1,20 @@
-
+import Hero from "./components/dashboard/Hero";
 import Header from "./components/statics/Header";
 
 function App() {
   return (
-    
-   <header className="">
-    <Header />
-   </header>
+    <>
+       {/* Header */}
+
+      <header>
+        <Header />
+      </header>
+
+     {/* Hero Section */}
+      <Hero />
+
+
+    </>
   );
 }
 
