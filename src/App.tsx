@@ -1,10 +1,10 @@
-import "./App.css";
+
 import Header from "./components/statics/Header";
 
 function App() {
   return (
     
-   <header>
+   <header className="mt-6">
     <Header />
    </header>
   );
