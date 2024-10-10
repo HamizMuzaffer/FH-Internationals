@@ -10,6 +10,7 @@ import {
 import { Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import links from "@/data/links";
+import { Link } from "react-router-dom";
 
 
 export function MobileSheet() {
@@ -43,7 +44,9 @@ export function MobileSheet() {
           <div>
           <Button className="w-full my-4">TRACK</Button>
           <hr />
+          <Link to="/login">
           <Button className="w-full" variant="outline">SIGN IN</Button>
+          </Link>
           </div>
         </SheetContent>
       </Sheet>
