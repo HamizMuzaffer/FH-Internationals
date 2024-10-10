@@ -9,9 +9,8 @@ import {
 
 import { Menu } from "lucide-react";
 import { Button } from "../ui/button";
+import links from "@/data/links";
 
-
-const links = [{ name: 'SERVICES' },{name: 'COD' },{ name: 'CASE/STUDIES' },{  name : 'MEDIA PROCUREMENT' },{  name : 'CORPORATE' },{  name : 'FRANCHISE' },{  name : 'CAREERS' },{  name : 'CONTACT US' },];
 
 export function MobileSheet() {
   return (

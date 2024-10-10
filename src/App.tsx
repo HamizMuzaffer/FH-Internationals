@@ -1,4 +1,4 @@
-import Hero from "./components/dashboard/Hero";
+import Hero from "./components/dashboard/Hero/Hero";
 import Header from "./components/statics/Header";
 
 function App() {
