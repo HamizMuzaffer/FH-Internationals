@@ -25,7 +25,7 @@ export function MobileSheet() {
         <SheetContent side="top">
           <SheetHeader>
             <SheetTitle>
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center w-screen">
                 <img src="/logo-new.png" alt="" width={100} height={100} />
               </div>
             </SheetTitle>
