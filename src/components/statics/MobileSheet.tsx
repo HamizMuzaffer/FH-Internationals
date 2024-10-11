@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 export function MobileSheet() {
   return (
-    <div className="pr-2">
+    <div className="px-2">
       <Sheet>
         <SheetTrigger asChild>
           <button>

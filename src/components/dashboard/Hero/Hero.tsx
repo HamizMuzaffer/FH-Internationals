@@ -32,7 +32,7 @@ const Hero = () => {
 
       <div
         className="w-full lg:w-1/2  flex justify-center items-center mt-8 lg:mt-0"
-        data-aos="fade-left"
+        data-aos="fade-up"
       >
         <img src="/hero.svg" alt="" width={500} height={500} />
       </div>
