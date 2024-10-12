@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Hero from "./components/dashboard/Hero/Hero";
 import Header from "./components/statics/Header";
 import Corporate from "./components/dashboard/Corporate/Corporate";
+import Footer from "./components/statics/Footer";
 
 function App() {
   useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
       </header>
       <Hero />
       <Corporate/>
-
+      <Footer/>
 
     </>
   );

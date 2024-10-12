@@ -35,7 +35,7 @@ const Contact = () => {
             </div>
             <div>
               <div className="flex h-full justify-center items-center">
-                <img src="/collaborators.svg" alt="" width={400} height={400} data-aos="fade-left"/>
+                <img src="/collaborators.svg" alt="" width={400} height={400} data-aos="fade-in"/>
               </div>
             </div>
           </div>

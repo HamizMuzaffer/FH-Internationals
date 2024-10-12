@@ -1,4 +1,3 @@
-
 import {
   Sheet,
   SheetContent,
@@ -26,7 +25,9 @@ export function MobileSheet() {
           <SheetHeader>
             <SheetTitle>
               <div className="flex justify-center items-center w-screen">
+                <Link to="/">
                 <img src="/logo-new.png" alt="" width={100} height={100} />
+                </Link>
               </div>
             </SheetTitle>
           
@@ -35,7 +36,9 @@ export function MobileSheet() {
           {links.map((link,index)=>{
             return (
             <div key={index} className="my-2">
+                <Link to={`${link.redirect}`}>
                 <span className="font-Ubunut text-md text-primary">{link.name}</span>
+                </Link>
                 <hr />
             </div>
             )

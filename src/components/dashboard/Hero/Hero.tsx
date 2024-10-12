@@ -29,7 +29,7 @@ const Hero = () => {
         className=" w-full lg:w-1/2 px-12 mt-8 lg:mt-0"
         data-aos="fade-right"
       >
-        <h2 className="font-Ubuntu text-2xl">
+        <h2 className="font-Ubuntu text-2xl pb-2">
           Serving thousands of customers across Pakistan
         </h2>
         <div className="w-32 h-1 bg-primary mb-4"></div>
@@ -51,7 +51,7 @@ const Hero = () => {
         data-aos="fade-up"
       >
         <div>
-        <img src="/hero.svg" alt="" className="w-[400px] h-[400px] lg:w-[500px] lg:h-[500px]"/>
+        <img src="/hero.svg" alt="" className="w-[300px] h-[300px] px-4 lg:w-[500px] lg:h-[500px]"/>
         </div>
       </div>
       <SignupDrawer isOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
