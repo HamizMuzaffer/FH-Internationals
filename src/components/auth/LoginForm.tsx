@@ -1,12 +1,10 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -22,36 +20,20 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Loader2 } from "lucide-react";
-
 import axiosInstance from "@/axios";
-
-import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Button } from "../ui/button";
+import { loginSchema } from "@/schemas/loginschema";
 
 const LoginForm = () => {
-  const formSchema = z.object({
-    email: z
-      .string()
-      .email()
-      .min(2, {
-        message: "Email is required!",
-      })
-      .max(50),
-    password: z
-      .string()
-      .min(2, {
-        message: "Password is required!",
-      })
-      .max(50),
-  });
+  
 
-  type FormValues = z.infer<typeof formSchema>;
+  type FormValues = z.infer<typeof loginSchema>;
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -158,14 +140,6 @@ const LoginForm = () => {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex items-center justify-center">
-        <p className="text-muted-foreground text-sm mt-2">
-          Don't have an account?{" "}
-          <Link to={"/auth/register"} className="underline">
-            Register
-          </Link>
-        </p>
-      </CardFooter>
     </Card>
   );
 };

@@ -31,7 +31,7 @@ export function MobileSheet() {
             </SheetTitle>
           
           </SheetHeader>
-          <div className="mb-4">
+          <div className="mb-4 font-bold">
           {links.map((link,index)=>{
             return (
             <div key={index} className="my-2">
