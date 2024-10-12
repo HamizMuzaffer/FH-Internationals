@@ -4,11 +4,18 @@
 
 @font-face {
   font-family: "Ubuntu";
-  src: url("./assets/fonts/Ubuntu-Light.ttf") format("truetype");
+  src: url("./assets/fonts/Ubuntu-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "ubold";
+  src: url("./assets/fonts/Ubuntu-Bold.ttf") format("truetype");
 }
 
 .font-Ubuntu{
 font-family: "Ubuntu",sans-serif;
+}
+.font-ubold{
+font-family : "ubold", sans-serif;
 }
 @layer base {
   :root {

@@ -18,7 +18,7 @@ const Corporate = () => {
   }, []);
   return (
     <div
-      className="mt-0 h-screen flex-col lg:flex-row flex justify-center items-center py-10"
+      className="mt-0 min-h-screen flex-col lg:flex-row flex justify-center items-center py-10"
       data-aos="fade-up"
     >
       <div className="px-12 lg:w-1/2 w-full h-full items-center justify-center">
@@ -57,7 +57,7 @@ const Corporate = () => {
       </div>
       <div
         className="lg:w-1/2 w-full h-full justify-center items-center px-12"
-        data-aos="zoom-in"
+        data-aos="fade-up"
       >
         <img
           src="/logistics.svg"
