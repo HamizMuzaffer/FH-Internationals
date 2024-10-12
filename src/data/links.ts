@@ -1,3 +1,4 @@
+
 const links = [
     { name: 'SERVICES' },
     {name: 'COD' },
@@ -6,7 +7,7 @@ const links = [
     {  name : 'CORPORATE' },
     {  name : 'FRANCHISE' },
     {  name : 'CAREERS' },
-    {  name : 'CONTACT US' },
+    {  name : 'CONTACT US', redirect : "/contact" }
   ];
 
   export default links;

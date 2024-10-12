@@ -17,7 +17,7 @@ const Corporate = () => {
     AOS.init({ duration: 1000, once: false });
   }, []);
   return (
-    <div className="mt-0 h-screen flex-col lg:flex-row flex justify-center items-center py-10">
+    <div className="mt-0 h-screen flex-col lg:flex-row flex justify-center items-center py-10" data-aos="fade-up">
       <div className="px-12 lg:w-1/2 w-full h-full items-center justify-center">
         <h2 className="font-Ubuntu text-2xl lg:text-5xl font-black py-2 px-4">
           Thousands of domestic customers
@@ -28,7 +28,7 @@ const Corporate = () => {
           services.
         </h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 px-4" data-aos="fade-in-left">
           <h3 className="flex gap-x-2 text-lg  items-center">
             {<RiTeamFill />}Multiple Staff Members
           </h3>
@@ -49,7 +49,7 @@ const Corporate = () => {
           </h3>
         </div>
       </div>
-      <div className="lg:w-1/2 w-full h-full justify-center items-center px-12">
+      <div className="lg:w-1/2 w-full h-full justify-center items-center px-12" data-aos="zoom-in">
         <img src="/logistics.svg" alt="" width={500} height={500} />
       </div>
     </div>
