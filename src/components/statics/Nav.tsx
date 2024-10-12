@@ -15,7 +15,7 @@ const Nav = () => {
     <div className="flex justify-center items-center font-bold">
       {links.map((link, index) => {
         return (
-          <Link to={`${link.redirect}`}>
+          <Link key={index} to={`${link.redirect}`}>
           <span key={index}  className="px-2 text-xs font-Ubuntu text-primary hover:cursor-pointer">{link.name}</span>
           </Link>
         );

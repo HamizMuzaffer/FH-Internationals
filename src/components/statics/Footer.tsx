@@ -33,32 +33,27 @@ const Footer = () => {
             <div className="">
               <img src="/logo-new.png" alt="" width={100} height={100} />
             </div>
-            <a className="hidden md:block cursor-pointer text-secondary font-Ubuntu capitalize">
+            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
               About
             </a>
-            <a className="hidden md:block cursor-pointer text-secondary font-Ubuntu capitalize">
+            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
               Services
             </a>
-            <a className="hidden md:block cursor-pointer text-secondary font-Ubuntu capitalize">
+            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
               Why us
             </a>
-            <a className="hidden md:block cursor-pointer text-secondary font-Ubuntu capitalize">
+            <a className="hidden  lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
               Contact
             </a>
             <div className="flex flex-row space-x-8 items-center justify-between text-secondary">
-              <a>
-                <RiInstagramFill />
-              </a>
-              <a>
-                <RiFacebookBoxFill />
-              </a>
-              <a>
-                <RiYoutubeFill />
-              </a>
+              
+              <a href="https://www.instagram.com/fh.international" target="blank"><RiInstagramFill /></a>           
+              <a href="https://www.facebook.com/FandHInternationalCourierCargo" target="blank"><RiFacebookBoxFill /></a>
+              <a href="https://www.youtube.com/" target="blank"><RiYoutubeFill/></a>
             </div>
           </div>
           <hr className="border-gray-600" />
-          <p className="w-full text-center my-12 text-gray-600" data-aos="fade-up">
+          <p className="w-full text-center mt-12 text-gray-600">
             Copyright © 2024 F&H Internationals
           </p>
         </div>

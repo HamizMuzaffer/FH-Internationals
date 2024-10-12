@@ -6,6 +6,8 @@ import AOS from "aos";
 // Scroll Animation
 AOS.init();
 import "aos/dist/aos.css";
+import Footer from "@/components/statics/Footer";
+
 const Contact = () => {
     React.useEffect(() => {
       AOS.init({ duration: 1000, once: false });
@@ -15,6 +17,7 @@ const Contact = () => {
       <header>
         <Header />
       </header>
+
       <section className="min-h-screen py-12 xl:px-12">
         <div className="container mx-auto px-4">
           <div className="grid xl:grid-cols-2 gap-12 xl:gap-24 pt-12 xl:h-[480px] mb-12 xl:mb-24" >
@@ -44,27 +47,30 @@ const Contact = () => {
             <div className="flex flex-col gap-y-6 xl:gap-y-10 text-base xl:text-lg"data-aos="fade-right">
               <div className="flex items-center gap-x-4">
                 <MailIcon size={24} className="text-primary" />
-                <div className="font-Ubuntu font-bold">
+                <div className="font-Ubuntu">
                   F&hintl321@gmail.com
                 </div>
               </div>
               <div className="flex items-center gap-x-4">
                 <PhoneIcon size={24} className="text-primary" />
-                <div className="font-Ubuntu font-bold">+923082347284</div>
+                <div className="font-Ubuntu">+923082347284</div>
               </div>
               <div className="flex items-center gap-x-4">
                 <HomeIcon size={24} className="text-primary" />
-                <div className="font-Ubuntu font-bold">
+                <div className="font-Ubuntu">
                   G62,Four Square Mall,Kurta Gali,Tariq Road,Karachi
                 </div>
               </div>
             </div>
-            <div data-aos="fade-left">
+            <div data-aos="fade-right">
             <Form />
             </div>
           </div>
         </div>
       </section>
+      <footer>
+        <Footer/>
+      </footer>
     </>
   );
 };
