@@ -15,10 +15,7 @@ export function AdminSidebar() {
       {/* Collapsible sidebar for smaller screens */}
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="lg:hidden">
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Toggle sidebar</span>
-          </Button>
+            <Menu className="h-6 w-6 text-black lg:hidden absolute my-4 mx-4" />
         </SheetTrigger>
         <SheetContent side="left" className="w-64 p-0">
           <SidebarContent />

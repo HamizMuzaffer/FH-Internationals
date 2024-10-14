@@ -22,7 +22,6 @@ export function SignupDrawer({ isOpen, toggleDrawer }: DrawerDemoProps) {
         <DrawerClose asChild>
           <Cross2Icon className="absolute top-4 right-4 w-8 h-8 cursor-pointer" />
         </DrawerClose>
-
         <div className="flex-grow overflow-y-auto p-4"> {/* Main content area */}
           <DrawerHeader className="flex flex-col justify-center items-center">
             <DrawerTitle>
