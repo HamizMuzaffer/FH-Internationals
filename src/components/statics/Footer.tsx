@@ -5,6 +5,7 @@ import {
   RiYoutubeFill,
 } from "react-icons/ri";
 import AOS from "aos";
+
 // Scroll Animation
 AOS.init();
 import "aos/dist/aos.css";
@@ -12,6 +13,7 @@ const Footer = () => {
     React.useEffect(() => {
         AOS.init({ duration: 1000, once: false });
       }, []);
+
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-white shadow-inner">
       <hr />
@@ -33,20 +35,11 @@ const Footer = () => {
             <div className="">
               <img src="/logo-new.png" alt="" width={100} height={100} />
             </div>
-            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
-              About
-            </a>
-            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
-              Services
-            </a>
-            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
-              Why us
-            </a>
-            <a className="hidden  lg:block cursor-pointer text-secondary font-Ubuntu capitalize">
-              Contact
-            </a>
-            <div className="flex flex-row space-x-8 items-center justify-between text-secondary">
-              
+            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">About</a>
+            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">Services</a>
+            <a className="hidden lg:block cursor-pointer text-secondary font-Ubuntu capitalize">Why us</a>
+            <a className="hidden  lg:block cursor-pointer text-secondary font-Ubuntu capitalize">Contact</a>
+            <div className="flex flex-row space-x-8 items-center justify-between text-secondary">              
               <a href="https://www.instagram.com/fh.international" target="blank"><RiInstagramFill /></a>           
               <a href="https://www.facebook.com/FandHInternationalCourierCargo" target="blank"><RiFacebookBoxFill /></a>
               <a href="https://www.youtube.com/" target="blank"><RiYoutubeFill/></a>
@@ -61,5 +54,4 @@ const Footer = () => {
     </div>
   );
 };
-
 export default Footer;
