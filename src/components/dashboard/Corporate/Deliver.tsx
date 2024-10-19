@@ -21,7 +21,7 @@ const Deliver = () => {
           Where in the world you want to deliver today?
         </h3>
         <div className="h-1 w-44 mx-12 my-2 bg-blue-800"></div>
-        <p className="text-justify px-12 py-2 font-serif">
+        <p className="text-justify px-12 py-2 text-xl">
           Register now at ShopandShip.com and you鈥檒l get 30 physical shopping
           addresses worldwide. Your online shopping orders will be received at
           any of the global addresses you choose. We will then deliver to you in
