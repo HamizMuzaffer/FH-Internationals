@@ -8,10 +8,12 @@ AOS.init();
 import "aos/dist/aos.css";
 import Footer from "@/components/statics/Footer";
 
+
 const Contact = () => {
     React.useEffect(() => {
       AOS.init({ duration: 1000, once: false });
     }, []);
+    
   return (
     <>
       <header>
