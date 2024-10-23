@@ -13,18 +13,10 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Loader2 } from "lucide-react";
-import { signupSchema } from "@/schemas/signupSchema";
 import axiosInstance from "@/axios";
 import toast from "react-hot-toast";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { signupSchema } from "@/schemas/signupSchema";
 
 const RegistrationForm = () => {
   type FormValues = z.infer<typeof signupSchema>;
@@ -39,10 +31,9 @@ const RegistrationForm = () => {
       username: "",
       contact: "",
       city: "",
-      info: "",
-      service: "",
-    },
-  });
+      cnic: ""
+    }
+  })
 
   const submitHandler = async (values: FormValues) => {
     setLoading(true);
@@ -159,30 +150,12 @@ const RegistrationForm = () => {
         {/* Service Type Field */}
         <FormField
           control={form.control}
-          name="service"
+          name="cnic"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Service Type</FormLabel>
+              <FormLabel>CNIC</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={(value) => form.setValue("service", value)}
-                  value={field.value}
-                >
-                  <SelectTrigger className="w-full"> {/* Full width select trigger */}
-                    <SelectValue placeholder="Select a service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="Parcel">Parcel</SelectItem>
-                      <SelectItem value="International Shipping">
-                        International Shipping
-                      </SelectItem>
-                      <SelectItem value="Cash on Delivery">
-                        Cash on Delivery
-                      </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+              <Input placeholder="00000-0000000-0" type="text" {...field} className="w-full" />
               </FormControl>
               <FormMessage />
             </FormItem>
