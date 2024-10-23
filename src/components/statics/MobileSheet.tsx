@@ -47,7 +47,7 @@ export function MobileSheet() {
           <div>
           <Button className="w-full my-4">TRACK</Button>
           <hr />
-          <Link to="/login">
+          <Link to="/auth/login">
           <Button className="w-full" variant="outline">SIGN IN</Button>
           </Link>
           </div>

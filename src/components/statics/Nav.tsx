@@ -39,7 +39,7 @@ const Nav = () => {
           </div>
         )}
 
-        <Link to='/login'>
+        <Link to='/auth/login'>
         <Button className="px-6 mx-2 "  variant={"outline"}>SIGN IN</Button>
         </Link>
         </div>
