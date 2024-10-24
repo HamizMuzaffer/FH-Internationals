@@ -1,8 +1,24 @@
-import { Link } from "react-router-dom"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { BarChart3, Box, HelpCircle, LayoutDashboard, Menu,  Settings, ShoppingCart, Users } from "lucide-react"
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  BarChart3,
+  Box,
+  HelpCircle,
+  LayoutDashboard,
+  Menu,
+  Settings,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuthContext } from "@/context/AuthContext";
 
 export function AdminSidebar() {
   return (
@@ -15,24 +31,29 @@ export function AdminSidebar() {
       {/* Collapsible sidebar for smaller screens */}
       <Sheet>
         <SheetTrigger asChild>
-            <Menu className="h-6 w-6 text-black lg:hidden absolute my-4 mx-4" />
+          <Menu className="h-6 w-6 text-black lg:hidden absolute my-4 mx-4" />
         </SheetTrigger>
         <SheetContent side="left" className="w-64 p-0">
           <SidebarContent />
         </SheetContent>
       </Sheet>
-
     </div>
-  )
+  );
 }
 
 function SidebarContent() {
+  const {removeAuthToken} = useAuthContext()
+  const handleLogout = () => {
+      removeAuthToken()
+  }
   return (
     <div className="flex h-full flex-col">
       <div className="flex min-h-14 items-center border-b px-4">
-        <Link className="flex items-center gap-2 font-semibold justify-center w-full" to="/admin/home">
+        <Link
+          className="flex items-center gap-2 font-semibold justify-center w-full"
+          to="/admin/home"
+        >
           <img src="/logo-new.png" alt="" className="w-24 h-14" />
-          
         </Link>
       </div>
       <ScrollArea className="flex-1">
@@ -76,13 +97,22 @@ function SidebarContent() {
         </nav>
       </ScrollArea>
       <div className="border-t p-2">
-        <Link to="">
-          <Button variant="ghost" className="w-full justify-start gap-2">
-            <Settings className="h-4 w-4" />
-            Settings
-          </Button>
-        </Link>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button variant="ghost" className="w-full justify-start gap-2">
+              <Settings className="h-4 w-4" />
+              Settings
+            </Button>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <button className="flex w-full" onClick={handleLogout}>
+                  Logout
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenuTrigger>
+        </DropdownMenu>
       </div>
     </div>
-  )
+  );
 }

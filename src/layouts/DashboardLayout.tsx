@@ -1,3 +1,4 @@
+import { NavbarComponent } from "@/components/dashboard/Home/navbar";
 import { useAuthContext } from "@/context/AuthContext";
 import { Navigate, Outlet } from "react-router-dom";
 
@@ -9,6 +10,7 @@ const DashboardLayout = () => {
   }
   return (
     <div>
+        <NavbarComponent/>
       <Outlet />
     </div>
   );
