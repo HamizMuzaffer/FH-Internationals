@@ -33,7 +33,7 @@ const RegistrationForm = () => {
       username: "",
       contact: "",
       city: "",
-      CNIC: 0
+      CNIC: ""
     }
   })
 
@@ -48,8 +48,8 @@ const RegistrationForm = () => {
         toast.success("Successfully Signed up");
       }
     } catch (error: any) {
-      console.log("Login Error", error?.response?.data?.message);
-      toast.error(error?.response?.data?.message);
+      console.log("Login Error", error.response.data.error);
+      toast.error(error.response.data.error);
     } finally {
       setLoading(false);
     }
@@ -158,7 +158,7 @@ const RegistrationForm = () => {
             <FormItem>
               <FormLabel>CNIC</FormLabel>
               <FormControl>
-              <Input placeholder="0000000000000" type="number" {...field} className="w-full" />
+              <Input placeholder="0000000000000" type="text" {...field} className="w-full" />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -15,10 +15,9 @@ export const signupSchema = z.object({
     .min(11, "Contact number must be at least 10 digits")
     .max(11, "Must not be more than 11"), // assuming phone number
   city: z.string().min(2, "City must be at least 2 characters"),
-  CNIC: z.number().min(13, "CNIC or should be upto 13 Numbers").max(13,"CNIT should not be longer than 10 ")
+  CNIC: z.string().regex(/^\d{5}-\d{7}-\d{1}$/, {
+    message: "Invalid CNIC format. It should be in the format #####-#######-#.",
+  }),
 });
 
 
-// CNIC: z.string().regex(/^\d{5}-\d{7}-\d{1}$/, {
-//   message: "Invalid CNIC format. It should be in the format #####-#######-#.",
-// }),
