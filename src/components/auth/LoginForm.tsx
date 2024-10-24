@@ -24,9 +24,10 @@ import axiosInstance from "@/axios";
 import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { loginSchema } from "@/schemas/loginschema";
+import { useAuthContext } from "@/context/AuthContext";
 
 const LoginForm = () => {
-  
+  const { setAuthToken } = useAuthContext()
 
   type FormValues = z.infer<typeof loginSchema>;
   const [isShow, setIsShow] = useState(false);
@@ -48,10 +49,10 @@ const LoginForm = () => {
       password: values.password,
     };
     try {
-      const response = await axiosInstance.post(`/auth/login`, formData);
+      const response = await axiosInstance.post(`/login`, formData);
 
       if (response.status === 200) {
-        
+        setAuthToken(response?.data)
         toast.success("Login Successfull");
       }
     } catch (error: any) {

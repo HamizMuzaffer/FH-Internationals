@@ -17,8 +17,10 @@ import axiosInstance from "@/axios";
 import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { signupSchema } from "@/schemas/signupSchema";
+import { useAuthContext } from "@/context/AuthContext";
 
 const RegistrationForm = () => {
+  const { setAuthToken } = useAuthContext();
   type FormValues = z.infer<typeof signupSchema>;
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,7 +44,8 @@ const RegistrationForm = () => {
       const response = await axiosInstance.post(`/auth/register`, formData);
 
       if (response.status === 200) {
-        toast.success("Login Successfull");
+        setAuthToken(response?.data)
+        toast.success("Successfully Signed up");
       }
     } catch (error: any) {
       console.log("Login Error", error?.response?.data?.message);
