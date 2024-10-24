@@ -8,6 +8,8 @@ import AdminLayout from "@/layouts/AdminLayout";
 import Orders from "@/pages/Admin/Orders";
 import Inquiries from "@/pages/Admin/Inquiries";
 import AuthLayout from "@/layouts/AuthLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
+import Home from "@/pages/Dashboard/Home";
 const router =  createBrowserRouter([
     {
         path: "/",
@@ -24,6 +26,17 @@ const router =  createBrowserRouter([
 
     ]
     },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout/>,
+        children : [
+            {
+                path: "/dashboard/home",
+                element: <Home/>
+            }
+        ]
+    },
+
     {
         path: "/admin",
         element: <AdminLayout />,

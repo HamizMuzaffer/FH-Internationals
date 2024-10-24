@@ -49,15 +49,15 @@ const LoginForm = () => {
       password: values.password,
     };
     try {
-      const response = await axiosInstance.post(`/login`, formData);
+      const response = await axiosInstance.post(`/auth/login`, formData);
 
       if (response.status === 200) {
         setAuthToken(response?.data)
         toast.success("Login Successfull");
       }
     } catch (error: any) {
-      console.log("Login Error", error?.response?.data?.message);
-      toast.error(error?.response?.data?.message);
+      console.log("Login Error",error.response.data.message);
+      toast.error(error.response.data.message);
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 export interface loginResponse {
-id: string    
+id: string,
+admin: boolean    
 token : string,
 username: string,
 email: string,

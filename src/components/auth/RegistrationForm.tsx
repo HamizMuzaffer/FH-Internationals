@@ -33,7 +33,7 @@ const RegistrationForm = () => {
       username: "",
       contact: "",
       city: "",
-      cnic: ""
+      CNIC: 0
     }
   })
 
@@ -153,12 +153,12 @@ const RegistrationForm = () => {
         {/* Service Type Field */}
         <FormField
           control={form.control}
-          name="cnic"
+          name="CNIC"
           render={({ field }) => (
             <FormItem>
               <FormLabel>CNIC</FormLabel>
               <FormControl>
-              <Input placeholder="00000-0000000-0" type="text" {...field} className="w-full" />
+              <Input placeholder="0000000000000" type="number" {...field} className="w-full" />
               </FormControl>
               <FormMessage />
             </FormItem>

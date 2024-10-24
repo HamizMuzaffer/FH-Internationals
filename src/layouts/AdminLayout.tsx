@@ -1,7 +1,12 @@
 import { AdminSidebar } from "@/components/dashboard/Admin/admin-sidebar"
-import { Outlet } from "react-router-dom"
-
+import { Outlet,Navigate } from "react-router-dom"
+import { useAuthContext } from "@/context/AuthContext"
 const AdminLayout = () => {
+  const {authToken} = useAuthContext()
+  
+  if (!authToken?.token || authToken?.admin == false ) {
+    return <Navigate to={"/auth/login"} replace />;
+  }
   return (
     <main className="flex">
     <AdminSidebar/>
@@ -10,4 +15,6 @@ const AdminLayout = () => {
   )
 }
 
-export default AdminLayout
+export default AdminLayout;
+
+
