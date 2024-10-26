@@ -56,7 +56,8 @@ export default {
   		},
 		backgroundImage: {
          contact : 'url(/contact.jpg)',
-		 signup : 'url(/sign-up.svg)'
+		 signup : 'url(/sign-up.svg)',
+		 business : 'url(/business.jpeg)'
 		},
   	}
   },

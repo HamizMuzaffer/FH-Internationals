@@ -10,6 +10,9 @@ import Inquiries from "@/pages/Admin/Inquiries";
 import AuthLayout from "@/layouts/AuthLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import Home from "@/pages/Dashboard/Home";
+import Pickup from "@/pages/Dashboard/Pickup";
+import Branch from "@/pages/Dashboard/Branch";
+import Rate from "@/pages/Dashboard/Rate";
 const router =  createBrowserRouter([
     {
         path: "/",
@@ -33,7 +36,19 @@ const router =  createBrowserRouter([
             {
                 path: "/dashboard/home",
                 element: <Home/>
-            }
+            },
+            {
+                path: "/dashboard/pickup",
+                element: <Pickup/>
+            },
+            {
+                path: "/dashboard/branch",
+                element: <Branch/>
+            },
+            {
+                path: "/dashboard/rate-calculator",
+                element: <Rate/>
+            },
         ]
     },
 

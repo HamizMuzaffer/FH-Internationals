@@ -18,9 +18,9 @@ import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { signupSchema } from "@/schemas/signupSchema";
 import { useAuthContext } from "@/context/AuthContext";
-
+import { Navigate } from "react-router";
 const RegistrationForm = () => {
-  const { setAuthToken } = useAuthContext();
+  const { setAuthToken} = useAuthContext();
   type FormValues = z.infer<typeof signupSchema>;
   const [isShow, setIsShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,18 +37,22 @@ const RegistrationForm = () => {
     }
   })
 
+  
   const submitHandler = async (values: FormValues) => {
+    
     setLoading(true);
     const formData = values;
     try {
       const response = await axiosInstance.post(`/auth/register`, formData);
 
-      if (response.status === 200) {
+      if (response?.status == 201) {
         setAuthToken(response?.data)
         toast.success("Successfully Signed up");
+      return  <Navigate to="/dashboard/home" replace />
+
       }
     } catch (error: any) {
-      console.log("Login Error", error.response.data.error);
+      console.log("Login Error", error.response.data.message);
       toast.error(error.response.data.error);
     } finally {
       setLoading(false);
