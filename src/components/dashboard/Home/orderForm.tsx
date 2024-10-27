@@ -1,110 +1,226 @@
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { orderSchema } from "@/schemas/orderSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 
 export function OrdersForm() {
-  const [formData, setFormData] = useState({
-    shipperName: "",
-    shipperAddress: "",
-    shipperEmail: "",
-    shipperPhone: "",
-    shipperNTN: "",
-    consigneeName: "",
-    consigneeAddress: "",
-    consigneePhone: "",
-    consigneeEmail: "",
-    parcelWeight: "",
-    parcelDetails: "",
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prevData => ({ ...prevData, [name]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(formData)
-    // Here you would typically send the data to your backend
-  }
+  const form = useForm({
+    resolver: zodResolver(orderSchema),
+    defaultValues: {
+      shipperName: "",
+      shipperAddress: "",
+      shipperEmail: "",
+      shipperPhone: "",
+      shipperNTN: "",
+      consigneeName: "",
+      consigneeAddress: "",
+      consigneePhone: "",
+      consigneeEmail: "",
+      parcelWeight: "",
+      parcelDetails: "",
+    },
+  });
+  type FormValues = z.infer<typeof orderSchema>
+  const onSubmit = (values:FormValues) => {
+    console.log("Form Data:", values);
+  };
 
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg">
       <CardHeader>
         <CardTitle>Shipping Information</CardTitle>
-        <CardDescription>Please fill out the shipping details for your parcel.</CardDescription>
+        <CardDescription>
+          Please fill out the shipping details for your parcel.
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Shipper Information</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="shipperName">Name</Label>
-                <Input id="shipperName" name="shipperName" placeholder="John Doe" value={formData.shipperName} onChange={handleChange} required />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Shipper Information</h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="shipperName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="John Doe" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="shipperEmail"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input {...field} type="email" placeholder="john@example.com" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="shipperPhone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="922345678900" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="shipperNTN"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>NTN</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="National Tax Number" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipperEmail">Email</Label>
-                <Input id="shipperEmail" name="shipperEmail" type="email" placeholder="john@example.com" value={formData.shipperEmail} onChange={handleChange} required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipperPhone">Phone</Label>
-                <Input id="shipperPhone" name="shipperPhone" placeholder="+1 234 567 8900" value={formData.shipperPhone} onChange={handleChange} required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipperNTN">NTN</Label>
-                <Input id="shipperNTN" name="shipperNTN" placeholder="National Tax Number" value={formData.shipperNTN} onChange={handleChange} />
-              </div>
+              <FormField
+                control={form.control}
+                name="shipperAddress"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Textarea {...field} placeholder="Enter full address" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="shipperAddress">Address</Label>
-              <Textarea id="shipperAddress" name="shipperAddress" placeholder="Enter full address" value={formData.shipperAddress} onChange={handleChange} required />
-            </div>
-          </div>
 
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Consignee Information</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="consigneeName">Name</Label>
-                <Input id="consigneeName" name="consigneeName" placeholder="Jane Smith" value={formData.consigneeName} onChange={handleChange} required />
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Consignee Information</h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="consigneeName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Jane Smith" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="consigneeEmail"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input {...field} type="email" placeholder="jane@example.com" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="consigneePhone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="922345678900" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="consigneeEmail">Email</Label>
-                <Input id="consigneeEmail" name="consigneeEmail" type="email" placeholder="jane@example.com" value={formData.consigneeEmail} onChange={handleChange} required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="consigneePhone">Phone</Label>
-                <Input id="consigneePhone" name="consigneePhone" placeholder="+1 234 567 8900" value={formData.consigneePhone} onChange={handleChange} required />
-              </div>
+              <FormField
+                control={form.control}
+                name="consigneeAddress"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Textarea {...field} placeholder="Enter full address" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="consigneeAddress">Address</Label>
-              <Textarea id="consigneeAddress" name="consigneeAddress" placeholder="Enter full address" value={formData.consigneeAddress} onChange={handleChange} required />
-            </div>
-          </div>
 
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Parcel Information</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="parcelWeight">Weight (kg)</Label>
-                <Input id="parcelWeight" name="parcelWeight" type="number" placeholder="0.00" value={formData.parcelWeight} onChange={handleChange} required />
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Parcel Information</h3>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="parcelWeight"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Weight (kg)</FormLabel>
+                      <FormControl>
+                        <Input {...field} type="number" placeholder="0.00" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
+              <FormField
+                control={form.control}
+                name="parcelDetails"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Details</FormLabel>
+                    <FormControl>
+                      <Textarea {...field} placeholder="Provide any additional details about the parcel" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="parcelDetails">Details</Label>
-              <Textarea id="parcelDetails" name="parcelDetails" placeholder="Provide any additional details about the parcel" value={formData.parcelDetails} onChange={handleChange} />
-            </div>
-          </div>
-        </form>
+
+            <Button type="submit" className="w-full">
+              Submit Shipping Information
+            </Button>
+          </form>
+        </Form>
       </CardContent>
-      <CardFooter>
-        <Button type="submit" className="w-full">Submit Shipping Information</Button>
-      </CardFooter>
     </Card>
-  )
+  );
 }
