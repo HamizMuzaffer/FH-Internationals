@@ -40,9 +40,9 @@ export function OrdersForm() {
   });
   type FormValues = z.infer<typeof orderSchema>
   const onSubmit = (values:FormValues) => {
-    console.log("Form Data:", values);
+    console.log(values)  
   };
-
+  
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg">
       <CardHeader>

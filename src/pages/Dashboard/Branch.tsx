@@ -1,7 +1,10 @@
+import Invoice from "@/services/invoice/Invoice"
 
 const Branch = () => {
   return (
-    <div>Branch</div>
+    <div>
+      <Invoice />
+    </div>
   )
 }
 
