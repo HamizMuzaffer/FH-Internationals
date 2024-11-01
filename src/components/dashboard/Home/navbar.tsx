@@ -1,30 +1,35 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bell, Menu } from 'lucide-react'
-import { Link } from "react-router-dom"
-import { useAuthContext } from "@/context/AuthContext"
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Bell, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "@/context/AuthContext";
 
 export function NavbarComponent() {
-  const {removeAuthToken} = useAuthContext()
-  const handleLogout = ()=> {
-    removeAuthToken()
-  }
+  const { removeAuthToken } = useAuthContext();
+  const handleLogout = () => {
+    removeAuthToken();
+  };
   return (
     <nav className="bg-background border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <img src="/logo-new.png" alt="" className="bg-contain w-12 h-12"/>
-            </div>
-       
+            <Link to="/dashboard/home">
+              <div className="flex items-center justify-center">
+                <img
+                  src="/logo-new.png"
+                  alt=""
+                  className="bg-contain w-16 h-16"
+                />
+              </div>
+            </Link>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <Button className="relative  bg-transparent hover:bg-transparent">
@@ -38,19 +43,30 @@ export function NavbarComponent() {
                 <Button variant="ghost" className="ml-3 relative">
                   <span className="sr-only">Open user menu</span>
                   <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="@shadcn"
+                    />
                     <AvatarFallback>SC</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem>
-                  <Link to="/profile" className="flex w-full">Profile</Link>
+                  <Link to="/profile" className="flex w-full">
+                    Profile
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link to="/settings" className="flex w-full">Settings</Link>
+                  <Link to="/settings" className="flex w-full">
+                    Settings
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link to="/dashboard/orders" className="flex w-full">
+                    Orders
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <button className="flex w-full" onClick={handleLogout}>
                     Logout
@@ -74,10 +90,14 @@ export function NavbarComponent() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 mt-2 sm:hidden">
                 <DropdownMenuItem>
-                  <Link to="/profile" className="flex w-full">Profile</Link>
+                  <Link to="/profile" className="flex w-full">
+                    Profile
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link to="/settings" className="flex w-full">Settings</Link>
+                  <Link to="/settings" className="flex w-full">
+                    Settings
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
@@ -91,5 +111,5 @@ export function NavbarComponent() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

@@ -20,6 +20,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+import toast from "react-hot-toast";
 
 export function OrdersForm() {
   const form = useForm({
@@ -39,12 +40,17 @@ export function OrdersForm() {
     },
   });
   type FormValues = z.infer<typeof orderSchema>
-  const onSubmit = (values:FormValues) => {
-    console.log(values)  
-  };
   
+ 
+  const onSubmit = async (values: FormValues) => {
+    console.log(values);
+    toast.success("Order Successfully placed")
+  };
+ 
   return (
+    
     <Card className="w-full max-w-2xl mx-auto shadow-lg">
+      
       <CardHeader>
         <CardTitle>Shipping Information</CardTitle>
         <CardDescription>
@@ -222,5 +228,8 @@ export function OrdersForm() {
         </Form>
       </CardContent>
     </Card>
+    
+    
   );
 }
+

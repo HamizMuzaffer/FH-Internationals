@@ -13,6 +13,7 @@ import Home from "@/pages/Dashboard/Home";
 import Pickup from "@/pages/Dashboard/Pickup";
 import Branch from "@/pages/Dashboard/Branch";
 import Rate from "@/pages/Dashboard/Rate";
+import OrderListing from "@/pages/Dashboard/OrderListing";
 const router =  createBrowserRouter([
     {
         path: "/",
@@ -48,6 +49,10 @@ const router =  createBrowserRouter([
             {
                 path: "/dashboard/rate-calculator",
                 element: <Rate/>
+            },
+            {
+                path: "/dashboard/orders",
+                element: <OrderListing/>
             },
         ]
     },
