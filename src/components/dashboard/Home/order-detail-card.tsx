@@ -4,8 +4,8 @@ import { Package, User, Calendar, FileText, MapPin, Receipt } from "lucide-react
 import { Link } from "react-router-dom";
 
 export function OrderDetailCard({
-  productName = "Ergonomic Desk Chair",
-  consigneeName = "John Doe",
+  productName = "Ladies Suits Boxes",
+  consigneeName = "Syed Hamza Ali",
   date = "2023-11-02",
   orderNo = "ORD-12345",
   address = "123 Main St, Anytown, AN 12345",
