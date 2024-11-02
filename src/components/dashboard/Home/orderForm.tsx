@@ -21,8 +21,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import toast from "react-hot-toast";
-
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import axiosInstance from "@/axios";
+import { useAuthContext } from "@/context/AuthContext";
 export function OrdersForm() {
+
+  const [loading,setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(orderSchema),
     defaultValues: {
@@ -40,13 +45,35 @@ export function OrdersForm() {
     },
   });
   type FormValues = z.infer<typeof orderSchema>
-  
+  const { authToken }= useAuthContext()
  
   const onSubmit = async (values: FormValues) => {
-    console.log(values);
-    toast.success("Order Successfully placed")
+    setLoading(true);
+    const formData  = {
+      userId : authToken?.user?._id,
+      ...values
+    }
+    console.log(formData)
+    try {
+      const response = await axiosInstance.post("/auth/orders", formData, {
+        headers : {
+          Authorization: `Bearer ${authToken?.token}`,
+        }
+      });
+      
+      if (response?.status === 201) {
+        toast.success("Order Successfully placed");
+        form.reset()
+      } else {
+        toast.error(response.data.message || "Unexpected error occurred");
+      }
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Network error";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
- 
   return (
     
     <Card className="w-full max-w-2xl mx-auto shadow-lg">
@@ -221,8 +248,14 @@ export function OrdersForm() {
               />
             </div>
 
-            <Button type="submit" className="w-full">
-              Submit Shipping Information
+            <Button disabled={loading} className="py-6 px-6 font-Ubuntu font-bold w-full" type="submit">
+              {loading ? (
+                <span className="flex w-full items-center justify-center">
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                </span>
+              ) : (
+                "Submit Shipping Information"
+              )}
             </Button>
           </form>
         </Form>

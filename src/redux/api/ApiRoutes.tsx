@@ -1,4 +1,5 @@
 
+// import { trackOrder } from "@/types";
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
@@ -9,7 +10,7 @@
 //     }),
 //     keepUnusedDataFor: 600,
 //     endpoints: (builder) => ({
-//       getStudents: builder.query<Student[], string>({
+//       getOrder: builder.query<trackOrder, string>({
 //         query: (token) => ({
 //           url: "/student/all",
 //           method: "GET",

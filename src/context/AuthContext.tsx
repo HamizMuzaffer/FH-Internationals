@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-    const [authToken, setAuthToken] = useState<loginResponse | null>(() => {
+    const [authToken, setAuthToken] = useState<loginResponse | null | any>(() => {
       const storedToken = localStorage.getItem("authToken");
       return storedToken ? JSON.parse(storedToken) : null;
     })

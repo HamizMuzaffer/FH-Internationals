@@ -15,6 +15,7 @@ import Branch from "@/pages/Dashboard/Branch";
 import Rate from "@/pages/Dashboard/Rate";
 import OrderListing from "@/pages/Dashboard/OrderListing";
 import OrderDescriptiom from "@/pages/Dashboard/OrderDescriptiom";
+import Tracking from "@/pages/Dashboard/Tracking";
 const router =  createBrowserRouter([
     {
         path: "/",
@@ -58,6 +59,10 @@ const router =  createBrowserRouter([
             {
                 path: "/dashboard/orders/:id",
                 element: <OrderDescriptiom/>
+            },
+            {
+                path: "/dashboard/track-order/:trackingNo",
+                element: <Tracking/>
             },
         ]
     },

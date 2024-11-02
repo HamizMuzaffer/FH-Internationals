@@ -9,7 +9,7 @@ const SwiperComponent = () => {
   return (
     <div style={{ position: 'relative' }}>
       {/* Overlay Input Field */}
-      <div className='w-full min-h-[400px] mb-20 flex justify-center items-center absolute'>
+      <div className='w-full min-h-[400px] mb-20 flex justify-center items-center absolute z-10'>
         <SearchBarComponent />
         </div>
       {/* Swiper Component */}

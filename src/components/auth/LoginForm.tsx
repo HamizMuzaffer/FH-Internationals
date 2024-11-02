@@ -56,8 +56,8 @@ const LoginForm = () => {
         toast.success("Login Successfull");
       }
     } catch (error: any) {
-      console.log("Login Error",error.response.data.message);
-      toast.error(error.response.data.message);
+      console.log("Login Error",error.response.data.error);
+      toast.error(error.response.data.error);
     } finally {
       setLoading(false);
     }
