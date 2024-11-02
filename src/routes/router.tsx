@@ -14,6 +14,7 @@ import Pickup from "@/pages/Dashboard/Pickup";
 import Branch from "@/pages/Dashboard/Branch";
 import Rate from "@/pages/Dashboard/Rate";
 import OrderListing from "@/pages/Dashboard/OrderListing";
+import OrderDescriptiom from "@/pages/Dashboard/OrderDescriptiom";
 const router =  createBrowserRouter([
     {
         path: "/",
@@ -53,6 +54,10 @@ const router =  createBrowserRouter([
             {
                 path: "/dashboard/orders",
                 element: <OrderListing/>
+            },
+            {
+                path: "/dashboard/orders/:id",
+                element: <OrderDescriptiom/>
             },
         ]
     },
