@@ -19,6 +19,25 @@ export interface orderResponse {
 
 }
 
+
+export interface Order{
+    _id : string,
+    userId : string,
+    shipperName: string,
+    shipperAddress: string,
+    shipperEmail: string,
+    shipperPhone: string,
+    shipperNTN: string,
+    consigneeName: string,
+    consigneeAddress: string,
+    consigneePhone: string,
+    consigneeEmail: string,
+    parcelWeight: number,
+    parcelDetails: string,
+    trackingNumber : string
+    status : string
+}
+
 export interface filteredOrder {
     status : string,
     orderDetails : object

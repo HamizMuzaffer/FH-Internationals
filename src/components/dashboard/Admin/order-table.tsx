@@ -26,43 +26,41 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowUpDown, Package, Truck, ShoppingCart, Edit } from "lucide-react"
+import { useGetOrdersQuery } from "@/redux/api/ApiRoutes"
+import { useAuthContext } from "@/context/AuthContext"
+import { Order } from "@/types"
 
-interface Order {
-  id: string
-  name: string
-  date: string
-  status: "Pending" | "Shipped" | "Delivered"
-  service: "Standard" | "Express" | "Next Day"
-}
 
-const initialOrders: Order[] = [
-  { id: "ORD-001", name: "Wireless Headphones", date: "2023-06-01", status: "Pending", service: "Standard" },
-  { id: "ORD-002", name: "Smart Watch", date: "2023-06-02", status: "Shipped", service: "Express" },
-  { id: "ORD-003", name: "Laptop", date: "2023-06-03", status: "Delivered", service: "Next Day" },
-  { id: "ORD-004", name: "Smartphone", date: "2023-06-04", status: "Pending", service: "Standard" },
-  { id: "ORD-005", name: "Tablet", date: "2023-06-05", status: "Shipped", service: "Express" },
-]
+// const initialOrders: Order[] = [
+//   { id: "ORD-001", name: "Wireless Headphones", date: "2023-06-01", status: "Pending", service: "Standard" },
+//   { id: "ORD-002", name: "Smart Watch", date: "2023-06-02", status: "Shipped", service: "Express" },
+//   { id: "ORD-003", name: "Laptop", date: "2023-06-03", status: "Delivered", service: "Next Day" },
+//   { id: "ORD-004", name: "Smartphone", date: "2023-06-04", status: "Pending", service: "Standard" },
+//   { id: "ORD-005", name: "Tablet", date: "2023-06-05", status: "Shipped", service: "Express" },
+// ]
 
 export function OrderTable() {
-  const [orders, setOrders] = useState<Order[]>(initialOrders)
-  const [sortColumn, setSortColumn] = useState<keyof Order>("date")
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
+  const {authToken} = useAuthContext()
+  // const [sortColumn, setSortColumn] = useState<keyof Order>("date")
+  // const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
   const [editingOrder, setEditingOrder] = useState<Order | null>(null)
+  const { data } = useGetOrdersQuery(authToken?.token || "")
+  // const [orders, setOrders] = useState(data)
 
-  const sortedOrders = [...orders].sort((a, b) => {
-    if (a[sortColumn] < b[sortColumn]) return sortDirection === "asc" ? -1 : 1
-    if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1
-    return 0
-  })
+  //  const sortedOrders = [...orders].sort((a, b) => {
+  //   if (a[sortColumn] < b[sortColumn]) return sortDirection === "asc" ? -1 : 1
+  //   if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1
+  //   return 0
+  // })
 
-  const toggleSort = (column: keyof Order) => {
-    if (column === sortColumn) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
-    } else {
-      setSortColumn(column)
-      setSortDirection("asc")
-    }
-  }
+  // const toggleSort = (column: keyof Order) => {
+  //   if (column === sortColumn) {
+  //     setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+  //   } else {
+  //     setSortColumn(column)
+  //     setSortDirection("asc")
+  //   }
+  // }
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -95,10 +93,10 @@ export function OrderTable() {
   }
 
   const handleSave = () => {
-    if (editingOrder) {
-      setOrders(orders.map(order => order.id === editingOrder.id ? editingOrder : order))
-      setEditingOrder(null)
-    }
+    // if (editingOrder) {
+    //   setOrders(data.map(order => order.id === editingOrder.id ? editingOrder : order))
+    //   setEditingOrder(null)
+    // }
   }
 
   return (
@@ -107,31 +105,31 @@ export function OrderTable() {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">
-              <Button variant="ghost" onClick={() => toggleSort("id")}>
+              <Button variant="ghost">
                 ID
                 <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" onClick={() => toggleSort("name")}>
+              <Button variant="ghost">
                 Order Name
                 <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" onClick={() => toggleSort("date")}>
+              <Button variant="ghost">
                 Date
                 <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" onClick={() => toggleSort("status")}>
+              <Button variant="ghost">
                 Status
                 <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
-              <Button variant="ghost" onClick={() => toggleSort("service")}>
+              <Button variant="ghost">
                 Service
                 <ArrowUpDown className="ml-2 h-4 w-4" />
               </Button>
@@ -140,11 +138,11 @@ export function OrderTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedOrders.map((order) => (
-            <TableRow key={order.id}>
-              <TableCell className="font-medium">{order.id}</TableCell>
-              <TableCell>{order.name}</TableCell>
-              <TableCell>{order.date}</TableCell>
+          {data?.map((order) => (
+            <TableRow key={order.trackingNumber}>
+              <TableCell className="font-medium">{order.trackingNumber}</TableCell>
+              <TableCell>{order.shipperName}</TableCell>
+              <TableCell>20-10-2024</TableCell>
               <TableCell>
                 <Badge variant="outline" className={`${getStatusColor(order.status)} text-white`}>
                   {order.status}
@@ -152,8 +150,8 @@ export function OrderTable() {
               </TableCell>
               <TableCell>
                 <div className="flex items-center">
-                  {getServiceIcon(order.service)}
-                  <span className="ml-2">{order.service}</span>
+                  {getServiceIcon("Express")}
+                  <span className="ml-2">Express</span>
                 </div>
               </TableCell>
               <TableCell>
@@ -166,7 +164,7 @@ export function OrderTable() {
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Edit Order {order.id}</DialogTitle>
+                      <DialogTitle>Edit Order {order._id}</DialogTitle>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
                       <div className="grid grid-cols-4 items-center gap-4">
@@ -175,7 +173,7 @@ export function OrderTable() {
                         </Label>
                         <Input
                           id="name"
-                          value={editingOrder?.name || ""}
+                          value={editingOrder?.shipperName || ""}
                           onChange={(e) => setEditingOrder(prev => prev ? { ...prev, name: e.target.value } : null)}
                           className="col-span-3"
                         />
@@ -187,7 +185,7 @@ export function OrderTable() {
                         <Input
                           id="date"
                           type="date"
-                          value={editingOrder?.date || ""}
+                          value=""
                           onChange={(e) => setEditingOrder(prev => prev ? { ...prev, date: e.target.value } : null)}
                           className="col-span-3"
                         />
@@ -215,8 +213,8 @@ export function OrderTable() {
                           Service
                         </Label>
                         <Select
-                          value={editingOrder?.service || ""}
-                          onValueChange={(value) => setEditingOrder(prev => prev ? { ...prev, service: value as Order['service'] } : null)}
+                          value={editingOrder?.status || ""}
+                          onValueChange={(value) => setEditingOrder(prev => prev ? { ...prev, service: value as Order['status'] } : null)}
                         >
                           <SelectTrigger className="col-span-3">
                             <SelectValue placeholder="Select service" />
