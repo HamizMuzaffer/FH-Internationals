@@ -3,6 +3,7 @@ import { Form } from "@/components/statics/Form";
 import Header from "@/components/statics/Header";
 import { MailIcon, PhoneIcon, HomeIcon } from "lucide-react";
 import AOS from "aos";
+
 // Scroll Animation
 AOS.init();
 import "aos/dist/aos.css";
