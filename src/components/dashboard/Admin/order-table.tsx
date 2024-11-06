@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   Table,
   TableBody,
@@ -6,47 +5,48 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ArrowUpDown, Package, Truck, ShoppingCart, Edit } from "lucide-react"
-import { useGetOrdersQuery } from "@/redux/api/ApiRoutes"
-import { useAuthContext } from "@/context/AuthContext"
-import { Order } from "@/types"
-
-
-// const initialOrders: Order[] = [
-//   { id: "ORD-001", name: "Wireless Headphones", date: "2023-06-01", status: "Pending", service: "Standard" },
-//   { id: "ORD-002", name: "Smart Watch", date: "2023-06-02", status: "Shipped", service: "Express" },
-//   { id: "ORD-003", name: "Laptop", date: "2023-06-03", status: "Delivered", service: "Next Day" },
-//   { id: "ORD-004", name: "Smartphone", date: "2023-06-04", status: "Pending", service: "Standard" },
-//   { id: "ORD-005", name: "Tablet", date: "2023-06-05", status: "Shipped", service: "Express" },
-// ]
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  ArrowUpDown,
+  Package,
+  Truck,
+  ShoppingCart,
+  Edit,
+ 
+} from "lucide-react";
+import { useGetOrdersQuery } from "@/redux/api/ApiRoutes";
+import { useAuthContext } from "@/context/AuthContext";
+import { Order } from "@/types";
+import axiosInstance from "@/axios";
+import toast from "react-hot-toast";
+import { useState,useEffect } from "react";
 
 export function OrderTable() {
-  const {authToken} = useAuthContext()
+  const { authToken } = useAuthContext();
+  
   // const [sortColumn, setSortColumn] = useState<keyof Order>("date")
   // const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
-  const [editingOrder, setEditingOrder] = useState<Order | null>(null)
-  const { data } = useGetOrdersQuery(authToken?.token || "")
-  // const [orders, setOrders] = useState(data)
-
+  const [editingOrder, setEditingOrder] = useState<Order | null>(null);
+  const { data } = useGetOrdersQuery(authToken?.token || "");
+  const [orders, setOrders] = useState<any>(data);
   //  const sortedOrders = [...orders].sort((a, b) => {
   //   if (a[sortColumn] < b[sortColumn]) return sortDirection === "asc" ? -1 : 1
   //   if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1
@@ -65,39 +65,64 @@ export function OrderTable() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Pending":
-        return "bg-yellow-500"
+        return "bg-yellow-500";
       case "Shipped":
-        return "bg-blue-500"
+        return "bg-blue-500";
       case "Delivered":
-        return "bg-green-500"
+        return "bg-green-500";
       default:
-        return "bg-gray-500"
+        return "bg-gray-500";
     }
-  }
+  };
 
   const getServiceIcon = (service: string) => {
     switch (service) {
       case "Standard":
-        return <Truck className="h-4 w-4" />
+        return <Truck className="h-4 w-4" />;
       case "Express":
-        return <ShoppingCart className="h-4 w-4" />
+        return <ShoppingCart className="h-4 w-4" />;
       case "Next Day":
-        return <Package className="h-4 w-4" />
+        return <Package className="h-4 w-4" />;
       default:
-        return <Truck className="h-4 w-4" />
+        return <Truck className="h-4 w-4" />;
     }
-  }
+  };
 
   const handleEdit = (order: Order) => {
-    setEditingOrder({ ...order })
+    setEditingOrder({ ...order });
+  };
+useEffect(() => {
+  if(data){
+    setOrders(data)
   }
+}, [])
 
-  const handleSave = () => {
-    // if (editingOrder) {
-    //   setOrders(data.map(order => order.id === editingOrder.id ? editingOrder : order))
-    //   setEditingOrder(null)
-    // }
-  }
+  const handleSave = async () => {
+    if (editingOrder) {
+      try {
+        const response = await axiosInstance.put(
+          "/auth/admin/update-status",
+          {
+            trackingNumber: editingOrder.trackingNumber,
+            status: editingOrder.status,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken?.token}`,
+            },
+          }
+        );
+
+        if (response.status == 200) {
+          toast.success(response?.data?.message);
+          setEditingOrder(response.data.order);
+        }
+      } catch (error) {
+        // Handle error here
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <div className="rounded-md border">
@@ -138,13 +163,18 @@ export function OrderTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((order) => (
+          {orders?.map((order: Order) => (
             <TableRow key={order.trackingNumber}>
-              <TableCell className="font-medium">{order.trackingNumber}</TableCell>
+              <TableCell className="font-medium">
+                {order.trackingNumber}
+              </TableCell>
               <TableCell>{order.shipperName}</TableCell>
               <TableCell>20-10-2024</TableCell>
               <TableCell>
-                <Badge variant="outline" className={`${getStatusColor(order.status)} text-white`}>
+                <Badge
+                  variant="outline"
+                  className={`${getStatusColor(order.status)} text-white`}
+                >
                   {order.status}
                 </Badge>
               </TableCell>
@@ -157,7 +187,11 @@ export function OrderTable() {
               <TableCell>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="ghost" size="sm" onClick={() => handleEdit(order)}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleEdit(order)}
+                    >
                       <Edit className="h-4 w-4 mr-2" />
                       Edit
                     </Button>
@@ -174,7 +208,11 @@ export function OrderTable() {
                         <Input
                           id="name"
                           value={editingOrder?.shipperName || ""}
-                          onChange={(e) => setEditingOrder(prev => prev ? { ...prev, name: e.target.value } : null)}
+                          onChange={(e) =>
+                            setEditingOrder((prev) =>
+                              prev ? { ...prev, name: e.target.value } : null
+                            )
+                          }
                           className="col-span-3"
                         />
                       </div>
@@ -186,7 +224,11 @@ export function OrderTable() {
                           id="date"
                           type="date"
                           value=""
-                          onChange={(e) => setEditingOrder(prev => prev ? { ...prev, date: e.target.value } : null)}
+                          onChange={(e) =>
+                            setEditingOrder((prev) =>
+                              prev ? { ...prev, date: e.target.value } : null
+                            )
+                          }
                           className="col-span-3"
                         />
                       </div>
@@ -196,7 +238,13 @@ export function OrderTable() {
                         </Label>
                         <Select
                           value={editingOrder?.status || ""}
-                          onValueChange={(value) => setEditingOrder(prev => prev ? { ...prev, status: value as Order['status'] } : null)}
+                          onValueChange={(value) =>
+                            setEditingOrder((prev) =>
+                              prev
+                                ? { ...prev, status: value as Order["status"] }
+                                : null
+                            )
+                          }
                         >
                           <SelectTrigger className="col-span-3">
                             <SelectValue placeholder="Select status" />
@@ -214,7 +262,13 @@ export function OrderTable() {
                         </Label>
                         <Select
                           value={editingOrder?.status || ""}
-                          onValueChange={(value) => setEditingOrder(prev => prev ? { ...prev, service: value as Order['status'] } : null)}
+                          onValueChange={(value) =>
+                            setEditingOrder((prev) =>
+                              prev
+                                ? { ...prev, service: value as Order["status"] }
+                                : null
+                            )
+                          }
                         >
                           <SelectTrigger className="col-span-3">
                             <SelectValue placeholder="Select service" />
@@ -236,5 +290,7 @@ export function OrderTable() {
         </TableBody>
       </Table>
     </div>
-  )
+  
+    
+  );
 }

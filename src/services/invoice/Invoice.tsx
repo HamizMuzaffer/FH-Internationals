@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 
 const Invoice = () => {
   const orderDetails = useSelector((state: RootState) => state.order.orderDetails);
-   console.log(orderDetails)
+   
   return (
           
         <div className="flex justify-center items-center">
