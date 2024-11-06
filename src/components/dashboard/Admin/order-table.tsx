@@ -37,7 +37,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { Order } from "@/types";
 import axiosInstance from "@/axios";
 import toast from "react-hot-toast";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 export function OrderTable() {
   const { authToken } = useAuthContext();
@@ -46,7 +46,7 @@ export function OrderTable() {
   // const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
   const [editingOrder, setEditingOrder] = useState<Order | null>(null);
   const { data } = useGetOrdersQuery(authToken?.token || "");
-  const [orders, setOrders] = useState<any>(data);
+
   //  const sortedOrders = [...orders].sort((a, b) => {
   //   if (a[sortColumn] < b[sortColumn]) return sortDirection === "asc" ? -1 : 1
   //   if (a[sortColumn] > b[sortColumn]) return sortDirection === "asc" ? 1 : -1
@@ -91,11 +91,7 @@ export function OrderTable() {
   const handleEdit = (order: Order) => {
     setEditingOrder({ ...order });
   };
-useEffect(() => {
-  if(data){
-    setOrders(data)
-  }
-}, [])
+
 
   const handleSave = async () => {
     if (editingOrder) {
@@ -163,7 +159,7 @@ useEffect(() => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders?.map((order: Order) => (
+          {data?.map((order) => (
             <TableRow key={order.trackingNumber}>
               <TableCell className="font-medium">
                 {order.trackingNumber}
