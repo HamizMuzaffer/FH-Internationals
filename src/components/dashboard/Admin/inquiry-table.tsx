@@ -3,13 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { InquiryCard } from './inquiry-card'
-interface Inquiry {
-  id: string
-  email: string
-  name: string
-  message: string
-}
-
+import  {Inquiry} from '../../../types/index'
 
 
 export function InquiryTable({ inquiries = [] }: { inquiries: Inquiry[] }) {

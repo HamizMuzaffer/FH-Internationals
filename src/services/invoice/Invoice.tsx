@@ -1,13 +1,17 @@
 import Barcode from "react-barcode";
 import QRCode from "react-qr-code";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const Invoice = () => {
+  const orderDetails = useSelector((state: RootState) => state.order.orderDetails);
+   console.log(orderDetails)
   return (
           
         <div className="flex justify-center items-center">
           <div className="w-[900px] min-h-[800px] border-2  flex-col justify-center items-center">
             <div className="flex justify-between px-2">
-              <p>10/2/23 10:28</p>
+              <p></p>
               <p>FandH Internationals</p>
             </div>
             <div className="flex justify-center items-center">
@@ -58,7 +62,7 @@ const Invoice = () => {
                     </div>
 
                     <div className="h-full">
-                      <span className="font-bold text-xs px-2">Account#</span>
+                      <span className="font-bold text-xs px-2">Account# &nbsp; {orderDetails?._id}</span>
                     </div>
                   </div>
                   <div className="h-full w-1/3 border-b-2 flex justify-center items-center border-black">
@@ -79,9 +83,9 @@ const Invoice = () => {
                       <div className="h-[45px]  px-2">Shipper Email</div>
                     </div>
                     <div className="input w-2/3 h-full">
-                      <div className="h-[30px] border-b-2 border-black px-2"></div>
-                      <div className="h-[45px] border-b-2 border-black  px-2"></div>
-                      <div className="h-[45px]  px-2"></div>
+                      <div className="h-[30px] border-b-2 border-black px-2 text-xs">{orderDetails?.shipperName}</div>
+                      <div className="h-[45px] border-b-2 border-black  px-2 text-xs">{orderDetails?.shipperAddress}</div>
+                      <div className="h-[45px]  px-2 text-xs">{orderDetails?.shipperEmail}</div>
                     </div>
                   </div>
                   <div className="w-1/2 h-full flex">
@@ -96,9 +100,9 @@ const Invoice = () => {
                       <div className="h-[45px]  px-2">Consignee Email</div>
                     </div>
                     <div className="input w-2/3 h-full">
-                      <div className="h-[30px] border-b-2 border-black px-2"></div>
-                      <div className="h-[45px] border-b-2 border-black  px-2"></div>
-                      <div className="h-[45px]  px-2"></div>
+                      <div className="h-[30px] border-b-2 border-black px-2 text-xs">{orderDetails?.consigneeName}</div>
+                      <div className="h-[45px] border-b-2 border-black  px-2 text-xs">{orderDetails?.consigneeAddress}</div>
+                      <div className="h-[45px]  px-2 text-xs">{orderDetails?.consigneeEmail}</div>
                     </div>
                   </div>
                 </div>
@@ -107,8 +111,8 @@ const Invoice = () => {
                 <div className="h-[120px] w-full border-b-2 border-black flex">
                   {/* NTN info           */}
                   <div className="h-full w-1/2 border-r-2 border-black flex">
-                    <div className="w-1/3 h-full border-r-2 border-black"></div>
-                    <div className="w-2/3 h-full"></div>
+                    <div className="w-1/3 h-full border-r-2 border-black px-2 text-xs font-bold">NTN/CNIC</div>
+                    <div className="w-2/3 h-full font-bold text-xs px-2">{orderDetails?.shipperNTN}</div>
                   </div>
 
                   {/* Bag Info */}
@@ -125,13 +129,13 @@ const Invoice = () => {
                     <div className="w-1/3 h-full border-r-2 border-black font-bold text-xs text-center">
                       Shipper's Telephone
                     </div>
-                    <div className="w-2/3 h-full"></div>
+                    <div className="w-2/3 h-full text-xs px-2">{orderDetails?.shipperPhone}</div>
                   </div>
-                  <div className="h-full w-1/2 border-r-2flex">
+                  <div className="h-full w-1/2 border-r-2 flex">
                     <div className="w-1/3 h-full border-r-2 border-black font-bold text-xs text-center">
                       Consignee's Telephone
                     </div>
-                    <div className="w-2/3 h-full"></div>
+                    <div className="w-2/3 h-full text-xs px-2">{orderDetails?.consigneePhone}</div>
                   </div>
                 </div>
 
@@ -206,17 +210,17 @@ const Invoice = () => {
                 {/* Footer */}
                 <div className="h-[173px] w-full border-black border-b-2 flex">
                   <div className="h-full w-[75%] border-black border-r-2 text-xs font-bold">
-                    <div className="w-full border-b-2 h-1/3 border-black">
+                    <div className="w-full border-b-2 h-1/3 border-black flex">
                       <div className="w-1/3 h-full border-r-2 border-black px-2">
                         Product Details
                       </div>
-                      <div className="w-2/3 h-full"></div>
+                      <div className="w-2/3 h-full text-xs px-2">{orderDetails?.parcelDetails}</div>
                     </div>
-                    <div className="w-full border-b-2 h-1/3 border-black text-xs font-bold ">
+                    <div className="w-full border-b-2 h-1/3 border-black text-xs flex ">
                       <div className="w-1/3 h-full border-r-2 border-black px-2">
                         Comments
                       </div>
-                      <div className="w-2/3 h-full"></div>
+                      <div className="w-2/3 h-full text-xs px-2">{orderDetails?.trackingNumber}</div>
                     </div>
                     <div className="w-full h-1/3 text-xs flex justify-center items-center ">
                       <span className="text-xs font-bold px-2">NOTE:</span>

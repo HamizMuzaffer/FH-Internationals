@@ -43,3 +43,16 @@ export interface filteredOrder {
     orderDetails : object
  
 }
+
+
+export interface Inquiry {
+    id: string
+    email: string
+    name: string
+    message: string
+  }
+  
+  
+  export interface OrderState {
+    orderDetails: Order | null;
+  }

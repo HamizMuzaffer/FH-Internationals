@@ -25,8 +25,11 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import axiosInstance from "@/axios";
 import { useAuthContext } from "@/context/AuthContext";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { setOrderDetails } from "@/features/order/orderSlice";
 export function OrdersForm() {
-
+  const dispatch : AppDispatch = useDispatch()
   const [loading,setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(orderSchema),
@@ -63,6 +66,8 @@ export function OrdersForm() {
       
       if (response?.status === 201) {
         toast.success("Order Successfully placed");
+        console.log(response.data)
+        dispatch(setOrderDetails(response.data));
         form.reset()
       } else {
         toast.error(response.data.message || "Unexpected error occurred");
