@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { InquiryCard } from './inquiry-card'
+// import { InquiryCard } from './inquiry-card'
 import  {Inquiry} from '../../../types/index'
 
 
@@ -30,7 +30,7 @@ export function InquiryTable({ inquiries = [] }: { inquiries: Inquiry[] }) {
             <TableRow key={inquiry.id}>
               <TableCell className="font-medium">{inquiry.id}</TableCell>
               <TableCell>
-                <InquiryCard {...inquiry} />
+                {/* <InquiryCard {...inquiry} /> */}
               </TableCell>
             </TableRow>
           ))}
