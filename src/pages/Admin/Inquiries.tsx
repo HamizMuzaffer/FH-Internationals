@@ -1,9 +1,13 @@
-import { InquiryCard } from "@/components/dashboard/Admin/inquiry-card"
+// import { InquiryCard } from "@/components/dashboard/Admin/inquiry-card"
+
+import { InquiryTable } from "@/components/dashboard/Admin/inquiry-table"
+import { inquiries } from "@/data/inquries"
 
 const Inquiries = () => {
   return (
-    <div>
-      <InquiryCard email="hamizmuzaffer@gmail.com" message="lorem ipsum" name="Hamiz  Muzaffer"/>
+    <div className="h-[300px]  w-screen">
+      {/* <InquiryCard email="hamizmuzaffer@gmail.com" message="lorem ipsum" name="Hamiz  Muzaffer"/> */}
+      <InquiryTable inquiries={inquiries}/>
     </div>
   )
 }

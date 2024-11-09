@@ -13,7 +13,7 @@ export function InquiryCard({ email, name, message }: InquiryProps = {
   message: "This is a sample inquiry message."
 }) {
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full h-full max-w-md mx-auto">
       <CardHeader>
         <CardTitle className="text-xl">Inquiry Details</CardTitle>
       </CardHeader>
