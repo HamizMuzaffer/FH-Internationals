@@ -1,24 +1,25 @@
-import { useState } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+// import { useState } from 'react'
+// import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+// import { Button } from "@/components/ui/button"
+// import { ChevronLeft, ChevronRight } from "lucide-react"
 // import { InquiryCard } from './inquiry-card'
-import  {Inquiry} from '../../../types/index'
+// import  {Inquiry} from '../../../types/index'
 
 
-export function InquiryTable({ inquiries = [] }: { inquiries: Inquiry[] }) {
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
-  const totalPages = Math.ceil(inquiries.length / itemsPerPage)
+export function InquiryTable() {
+  /* { inquiries = [] }: { inquiries: Inquiry[] }) */
+  // const [currentPage, setCurrentPage] = useState(1)
+  // const itemsPerPage = 5
+  // const totalPages = Math.ceil(inquiries.length / itemsPerPage)
 
-  const paginatedInquiries = inquiries.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  )
+  // const paginatedInquiries = inquiries.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // )
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-4">
-      <Table>
+      {/* <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
@@ -30,7 +31,7 @@ export function InquiryTable({ inquiries = [] }: { inquiries: Inquiry[] }) {
             <TableRow key={inquiry.id}>
               <TableCell className="font-medium">{inquiry.id}</TableCell>
               <TableCell>
-                {/* <InquiryCard {...inquiry} /> */}
+                <InquiryCard {...inquiry} /> 
               </TableCell>
             </TableRow>
           ))}
@@ -56,7 +57,7 @@ export function InquiryTable({ inquiries = [] }: { inquiries: Inquiry[] }) {
           Next
           <ChevronRight className="h-4 w-4 ml-2" />
         </Button>
-      </div>
+      </div> */}
     </div>
   )
 }
